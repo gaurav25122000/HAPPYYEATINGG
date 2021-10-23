@@ -18,7 +18,7 @@ body {
   display: grid;
   grid-template-areas: "header" "main" "footer";
   grid-template-columns: 1fr;
-  grid-template-rows: 5rem 1fr 5rem;
+  grid-template-rows: 6rem 1fr 5rem;
   height: 100%;
 }
 header {
@@ -31,8 +31,8 @@ main {
 }
 footer {
   grid-area: footer;
-  background: #203040;
-  color: #ffffff;
+  background: #f6f6e9;
+  color: #291b25;
 }
 
 /* Common*/
