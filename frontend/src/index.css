@@ -34,7 +34,17 @@ footer {
   background: #f6f6e9;
   color: #291b25;
 }
-
+footer span {
+  color: #291b25;
+  font-weight: bold;
+}
+.copyright {
+  color: #291b25;
+  font-weight: bold;
+}
+.copyright :hover a {
+  text-decoration: underline;
+}
 /* Common*/
 h1 {
   font-size: 1.8rem;
