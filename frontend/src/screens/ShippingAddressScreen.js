@@ -16,12 +16,20 @@ export default function ShippingAddressScreen(props) {
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
+  const [phone, setPhone] = useState(shippingAddress.phone);
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      saveShippingAddress({ fullName, address, city, postalCode, country })
+      saveShippingAddress({
+        fullName,
+        address,
+        city,
+        postalCode,
+        country,
+        phone,
+      })
     );
     props.history.push("/payment");
   };
@@ -84,6 +92,17 @@ export default function ShippingAddressScreen(props) {
             placeholder="Enter Country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
+            required
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="phone">Phone Number:</label>
+          <input
+            type="text"
+            id="phone"
+            placeholder="Enter Phone number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             required
           ></input>
         </div>

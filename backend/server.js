@@ -14,8 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 mongoose.connect(
-  process.env.MONGODB_URL || "mongodb://localhost/happyyeatingg",
-  {}
+  process.env.MONGODB_URL || "mongodb://localhost/happyyeatingg"
 );
 
 app.use("/api/uploads", uploadRouter);
