@@ -3,7 +3,12 @@ import { PayPalButton } from "react-paypal-button-v2";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deliverOrder, detailsOrder, payOrder } from "../actions/orderActions";
+import {
+  adminPayOrder,
+  deliverOrder,
+  detailsOrder,
+  payOrder,
+} from "../actions/orderActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import {
@@ -68,7 +73,9 @@ export default function OrderScreen(props) {
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(order, paymentResult));
   };
-
+  const adminSuccessPaymentHandler = () => {
+    dispatch(adminPayOrder(order));
+  };
   const deliverHandler = () => {
     dispatch(deliverOrder(order._id));
   };
@@ -205,7 +212,17 @@ export default function OrderScreen(props) {
                   )}
                 </li>
               )}
-
+              {userInfo.isAdmin && !order.isPaid && !order.isDelivered && (
+                <li>
+                  <button
+                    type="button"
+                    className="primary block"
+                    onClick={adminSuccessPaymentHandler}
+                  >
+                    Order Paid
+                  </button>
+                </li>
+              )}
               {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}

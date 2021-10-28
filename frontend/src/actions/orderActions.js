@@ -169,3 +169,34 @@ export const deliverOrder = (orderId) => async (dispatch, getState) => {
     dispatch({ type: ORDER_DELIVER_FAIL, payload: message });
   }
 };
+
+export const adminPayOrder =
+  (
+    order,
+    paymentResult = {
+      id: "COD",
+      status: "COD",
+      update_time: Date.now(),
+      email_address: "Admin",
+    }
+  ) =>
+  async (dispatch, getState) => {
+    dispatch({ type: ORDER_PAY_REQUEST, payload: { order, paymentResult } });
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    try {
+      const { data } = await Axios.put(
+        `/api/orders/${order._id}/adminpay`,
+        paymentResult,
+        { headers: { Authorization: `Bearer ${userInfo.token}` } }
+      );
+      dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      dispatch({ type: ORDER_PAY_FAIL, payload: message });
+    }
+  };
